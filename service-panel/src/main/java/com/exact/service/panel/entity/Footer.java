@@ -26,6 +26,8 @@ public class Footer implements Serializable{
 	private String descripcion;
 	
 	private String color_descripcion;
+	
+	
 
 	public Long getId() {
 		return id;
