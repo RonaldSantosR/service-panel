@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,7 +26,7 @@ public class Item implements Serializable{
 
 	private String nombre;
 	
-	private String descripción;
+	private String descripcion;
 	
 	private String ruta_imagen;
 	
@@ -34,11 +36,11 @@ public class Item implements Serializable{
 	
 	private String link_ruta;
 
-	
-	@OneToOne
-	private Tipo_Item tipo_item;
 
-	
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="tipo_item_id")
+	private Tipo_Item tipo_item;
 	
 	
 	public Long getId() {
@@ -57,12 +59,14 @@ public class Item implements Serializable{
 		this.nombre = nombre;
 	}
 
-	public String getDescripción() {
-		return descripción;
+
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescripción(String descripción) {
-		this.descripción = descripción;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public String getRuta_imagen() {
