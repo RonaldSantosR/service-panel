@@ -11,7 +11,7 @@ import com.exact.service.panel.entity.Item;
 import com.exact.service.panel.service.interfaces.IItemservice;
 
 @RestController
-@RequestMapping("/item")
+@RequestMapping("/items")
 public class ItemController {
 	
 	@Autowired
@@ -20,6 +20,5 @@ public class ItemController {
 	@GetMapping()
 	public ResponseEntity<Iterable<Item>> listarItem() {
 		return  new ResponseEntity<Iterable<Item>>(itemservice.listaritem(),HttpStatus.OK);
-		//return new ResponseEntity<String>(perfilservice.obtenerCorreo(id),HttpStatus.OK);
 	}
 }
