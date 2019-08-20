@@ -1,5 +1,6 @@
 package com.exact.service.panel.service.clases;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class Itemservice implements IItemservice {
 
 	@Override
 	public Iterable<Item> listaritem() {
+		
 		return itemdao.findAll();
 	}
 

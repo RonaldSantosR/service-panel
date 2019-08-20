@@ -7,18 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.exact.service.panel.entity.Item;
-import com.exact.service.panel.service.interfaces.IItemservice;
+import com.exact.service.panel.entity.Pagina;
+import com.exact.service.panel.service.interfaces.IPaginaService;
 
 @RestController
-@RequestMapping("/items")
-public class ItemController {
-	
+@RequestMapping("/pagina")
+public class PaginaController {
+
 	@Autowired
-	IItemservice itemservice;
+	IPaginaService paginaService;
 	
-	@GetMapping()
-	public ResponseEntity<Iterable<Item>> listarItem() {
-		return  new ResponseEntity<>(itemservice.listaritem(),HttpStatus.OK);
+	@GetMapping
+	public ResponseEntity<Pagina> listarPaginaPrincipal(){
+		return  new ResponseEntity<Pagina>(paginaService.listarPaginaPrincipal(),HttpStatus.OK);
 	}
+	
 }
