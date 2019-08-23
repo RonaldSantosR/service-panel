@@ -30,13 +30,12 @@ public class Item implements Serializable{
 	
 	private String ruta_imagen;
 	
-	private String orden;
+	private int orden;
 	
-	private String color;
+	@Column(name="color_texto")
+	private String colorTexto;
 	
 	private String link_ruta;
-
-
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="tipo_item_id")
@@ -50,16 +49,6 @@ public class Item implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-
 
 	public String getDescripcion() {
 		return descripcion;
@@ -77,20 +66,29 @@ public class Item implements Serializable{
 		this.ruta_imagen = ruta_imagen;
 	}
 
-	public String getOrden() {
+		
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getOrden() {
 		return orden;
 	}
 
-	public void setOrden(String orden) {
+	public void setOrden(int orden) {
 		this.orden = orden;
 	}
 
-	public String getColor() {
-		return color;
+	public String getColorTexto() {
+		return colorTexto;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setColorTexto(String colorTexto) {
+		this.colorTexto = colorTexto;
 	}
 
 	public String getLink_ruta() {

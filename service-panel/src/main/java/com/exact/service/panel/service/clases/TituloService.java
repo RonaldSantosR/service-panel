@@ -17,7 +17,4 @@ public class TituloService implements ITituloService{
 	public Iterable<Titulo> listarTitulo() {
 		return tituloDao.findAll();
 	}
-
-	
-	
 }
