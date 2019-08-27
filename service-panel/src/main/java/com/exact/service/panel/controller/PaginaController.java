@@ -1,5 +1,7 @@
 package com.exact.service.panel.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class PaginaController {
 	IPaginaService paginaService;
 	
 	@GetMapping
-	public ResponseEntity<Map<Integer,Object>> listarPaginaPrincipal(){
+	public ResponseEntity<Map<Integer,Object>> listarPaginaPrincipal() throws IOException{
 		return  new ResponseEntity<>(paginaService.listarPaginaPrincipal(),HttpStatus.OK);
 	}
 	
