@@ -29,7 +29,8 @@ public class Footer implements Serializable{
 	
 	private String descripcion;
 	
-	private String color_descripcion;
+	@Column(name="color_descripcion")
+	private String colorDescripcion;
 	
 	
 
@@ -65,13 +66,15 @@ public class Footer implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public String getColor_descripcion() {
-		return color_descripcion;
+	public String getColorDescripcion() {
+		return colorDescripcion;
 	}
 
-	public void setColor_descripcion(String color_descripcion) {
-		this.color_descripcion = color_descripcion;
+	public void setColorDescripcion(String colorDescripcion) {
+		this.colorDescripcion = colorDescripcion;
 	}
+
+	
 	
 	
 	
