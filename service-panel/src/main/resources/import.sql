@@ -5,7 +5,7 @@ INSERT [dbo].[pagina] ([pagina_id], [color]) VALUES (1,'#FFFFFF')
 SET IDENTITY_INSERT [dbo].[pagina] OFF
 
 SET IDENTITY_INSERT [dbo].[footer] ON 
-INSERT [dbo].[footer] ([footer_id], [color], [logo], [descripcion], [color_descripcion]) VALUES (1, 'A4B5C4', 'ruta', 'EXACT- Todos los derechos reservados', 'FFFFFF')
+INSERT [dbo].[footer] ([footer_id], [color], [logo], [descripcion], [color_descripcion]) VALUES (1, '#92999f', 'C:/Panel/logos/exact.png', 'EXACT- Todos los derechos reservados', '#FFFFFF')
 SET IDENTITY_INSERT [dbo].[footer] OFF
 
 SET IDENTITY_INSERT [dbo].[tipo_item] ON 

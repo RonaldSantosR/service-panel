@@ -1,19 +1,10 @@
 package com.exact.service.panel.service.clases;
 
-
-
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Base64;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +38,7 @@ public class PaginaService implements IPaginaService {
 
 		Iterable<Titulo> titulos = tituloDao.findAll();
 		Iterable<Item> items = itemDao.findAll();
-		Iterable<Footer> footer = footerDao.findAll();
+		Iterable<Footer> footers = footerDao.findAll();
 		Map<Integer,Object> vistaPrincipal = new HashMap<>();
 		
 		for(Item item : items) {
@@ -55,10 +46,14 @@ public class PaginaService implements IPaginaService {
 			item.setRuta_imagen(imagenB64);
 		}
 		
+		for(Footer footer : footers) {
+			String imagenB64=ConvertImageToBase64.encodeToString(footer.getLogo());
+			footer.setLogo(imagenB64);
+		}
 		
 		vistaPrincipal.put(1, titulos);
 		vistaPrincipal.put(2, items);
-		vistaPrincipal.put(3, footer);
+		vistaPrincipal.put(3, footers);
 		
 		return vistaPrincipal;
 		

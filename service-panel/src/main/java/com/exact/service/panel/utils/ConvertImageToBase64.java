@@ -16,8 +16,7 @@ public class ConvertImageToBase64 {
 
 	public static String encodeToString(String ruta) throws IOException {
 		File file = new File(ruta);
-		//byte[] fileContent = FileUtils.readFileToByteArray(new File(ruta));
-		String encoded = Base64.getEncoder().withoutPadding().encodeToString(FileUtils.readFileToByteArray(file));
-		 return encoded;
+		return Base64.getEncoder().withoutPadding().encodeToString(FileUtils.readFileToByteArray(file));
+		
 	}
 }
