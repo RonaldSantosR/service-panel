@@ -4,6 +4,10 @@ import com.exact.service.panel.entity.Item;
 
 public interface IItemservice {
 		
-	public Iterable<Item> listaritem();
+	public Iterable<Item> listarItemsActivos();
+	public Iterable<Item> listarItems();
 	public Item agregarItem(Item item);
+	public Item desactivarItem(Long itemId);
+	public Iterable<Item> cambiarOrdenItem(Long itemId, int orden);
+	public Item modificarItem(Item item);
 }
