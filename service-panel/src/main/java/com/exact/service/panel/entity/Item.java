@@ -41,6 +41,7 @@ public class Item implements Serializable{
 	@JoinColumn(name="tipo_item_id")
 	private Tipo_Item tipo_item;
 	
+	private boolean activo;
 	
 	public Long getId() {
 		return id;
@@ -106,7 +107,14 @@ public class Item implements Serializable{
 	public void setTipo_item(Tipo_Item tipo_item) {
 		this.tipo_item = tipo_item;
 	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
 	
-	
-	
+		
 }
