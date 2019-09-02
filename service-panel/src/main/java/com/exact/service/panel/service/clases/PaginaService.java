@@ -3,7 +3,10 @@ package com.exact.service.panel.service.clases;
 import java.io.IOException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,8 +56,11 @@ public class PaginaService implements IPaginaService {
 			footer.setLogo(imagenB64);
 		}
 		
+		List<Item> itemlst = StreamSupport.stream(items.spliterator(), false).collect(Collectors.toList());
+		itemlst.removeIf(item->!item.isActivo());
+		
 		vistaPrincipal.put(1, titulos);
-		vistaPrincipal.put(2, items);
+		vistaPrincipal.put(2, itemlst);
 		vistaPrincipal.put(3, footers);
 		vistaPrincipal.put(4, paginas);
 
