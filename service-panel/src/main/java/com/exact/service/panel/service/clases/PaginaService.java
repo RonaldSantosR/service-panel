@@ -68,6 +68,16 @@ public class PaginaService implements IPaginaService {
 		
 	}
 
+	@Override
+	public Pagina modificarPagina(Pagina pag) throws IOException {
+		if(pag.getColor()!=null) {
+			return paginaDao.save(pag);
+
+		}
+		
+		return null;
+	}
+
 	
 	
 }

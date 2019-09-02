@@ -6,4 +6,6 @@ public interface ITituloService {
 
 	public Iterable<Titulo> listarTitulo();
 	
+	public Titulo modificarTitulo(Titulo titulo);
+	
 }
