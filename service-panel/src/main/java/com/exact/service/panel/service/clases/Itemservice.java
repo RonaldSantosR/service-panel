@@ -38,6 +38,9 @@ public class Itemservice implements IItemservice {
 	@Override
 	public Item agregarItem(Item item) {
 		item.setRuta_imagen(rutaLogo+item.getNombre());
+		int ordenmayor = itemdao.MayorOrden();
+		item.setOrden(ordenmayor+1);
+		item.setActivo(true);
 		return itemdao.save(item);
 	}
 
@@ -78,13 +81,29 @@ public class Itemservice implements IItemservice {
 		return itemdao.saveAll(itemlst);
 		
 	}
+	
+	public void cambiarorden(Long itemId, int orden) {
+		Optional<Item> itemopt = itemdao.findById(itemId);
+		Item item = itemopt.get();
+		int ordenAnterior = item.getOrden();
+		Iterable<Item> itemlst = itemdao.findAll();
+		for(Item it : itemlst) {
+			if(it.getOrden()==orden) {
+			it.setOrden(ordenAnterior);
+			itemdao.save(it);
+			}
+		}
+	}
+	
 
 	@Override
 	public Item modificarItem(Item item) {
 		Optional<Item> itemopt = itemdao.findById(item.getId());
+		
 		if(!itemopt.isPresent()) {
 			return null;
 		}
+		
 		Item itemActualizado = itemopt.get();
 		
 		if(item.getDescripcion()!=null) {
@@ -102,6 +121,12 @@ public class Itemservice implements IItemservice {
 		if(item.getLink_ruta()!=null) {
 			itemActualizado.setLink_ruta(item.getLink_ruta());
 		}
+		
+		cambiarorden(item.getId(),item.getOrden());
+		
+		itemActualizado.setOrden(item.getOrden());
+		
+		itemActualizado.setActivo(item.isActivo());
 		
 		return itemdao.save(itemActualizado);
 	}
