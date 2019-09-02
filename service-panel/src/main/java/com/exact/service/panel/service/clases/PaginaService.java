@@ -14,6 +14,7 @@ import com.exact.service.panel.dao.IPaginaDao;
 import com.exact.service.panel.dao.ITituloDao;
 import com.exact.service.panel.entity.Footer;
 import com.exact.service.panel.entity.Item;
+import com.exact.service.panel.entity.Pagina;
 import com.exact.service.panel.entity.Titulo;
 import com.exact.service.panel.service.interfaces.IPaginaService;
 import com.exact.service.panel.utils.ConvertImageToBase64;
@@ -39,6 +40,7 @@ public class PaginaService implements IPaginaService {
 		Iterable<Titulo> titulos = tituloDao.findAll();
 		Iterable<Item> items = itemDao.findAll();
 		Iterable<Footer> footers = footerDao.findAll();
+		Iterable<Pagina> paginas = paginaDao.findAll();
 		Map<Integer,Object> vistaPrincipal = new HashMap<>();
 		
 		for(Item item : items) {
@@ -54,7 +56,8 @@ public class PaginaService implements IPaginaService {
 		vistaPrincipal.put(1, titulos);
 		vistaPrincipal.put(2, items);
 		vistaPrincipal.put(3, footers);
-		
+		vistaPrincipal.put(4, paginas);
+
 		return vistaPrincipal;
 		
 	}
