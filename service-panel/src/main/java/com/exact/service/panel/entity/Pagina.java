@@ -23,10 +23,7 @@ public class Pagina implements Serializable {
 	private Long id;
 	
 	private String color;
-	
-	@OneToOne
-	private Footer footer;
-	
+
 	
 	public Long getId() {
 		return id;
@@ -45,14 +42,7 @@ public class Pagina implements Serializable {
 	}
 
 
-	public Footer getFooter() {
-		return footer;
-	}
 
-	public void setFooter(Footer footer) {
-		this.footer = footer;
-	}
-	
 	
 	
 	

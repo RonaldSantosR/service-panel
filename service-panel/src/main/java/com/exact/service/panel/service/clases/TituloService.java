@@ -17,4 +17,12 @@ public class TituloService implements ITituloService{
 	public Iterable<Titulo> listarTitulo() {
 		return tituloDao.findAll();
 	}
+
+	@Override
+	public Titulo modificarTitulo(Titulo titulo) {
+		if(titulo.getColorBajo()!=null && titulo.getColorMedio()!=null && titulo.getColorAlto()!=null) {
+			return tituloDao.save(titulo);
+		}
+		return null;
+	}
 }
