@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.exact.service.panel.dao.IItemDao;
 import com.exact.service.panel.entity.Item;
+import com.exact.service.panel.entity.Tipo_Item;
 import com.exact.service.panel.service.interfaces.IItemservice;
 
 
@@ -37,10 +38,11 @@ public class Itemservice implements IItemservice {
 
 	@Override
 	public Item agregarItem(Item item) {
-		item.setRuta_imagen(rutaLogo+item.getNombre());
+		item.setRuta_imagen(rutaLogo+item.getRuta_imagen());
 		int ordenmayor = itemdao.MayorOrden();
 		item.setOrden(ordenmayor+1);
 		item.setActivo(true);
+		item.setTipo_item(new Tipo_Item(1L));
 		return itemdao.save(item);
 	}
 
