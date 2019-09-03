@@ -37,13 +37,34 @@ public class Itemservice implements IItemservice {
 	}
 
 	@Override
-	public Item agregarItem(Item item) {
-		item.setRuta_imagen(rutaLogo+item.getRuta_imagen());
+	public int  agregarItem(Item item) {
+		
+		try {
+			if(item.getNombre().equals("") || item.getDescripcion().equals("") || item.getLink_ruta().equals("")  || item.getColorTexto().equals("") || item.getTipo_item().equals(null) ) {
+				return 0;
+			}
+		}catch(NullPointerException e) {
+			return 0;
+		}
+		
+		try {
+			if(item.getTipo_item().getId() <=0L) {
+				return 0;
+			}
+
+		}catch(NullPointerException e) {
+			return 0;
+		}
+
+		item.setRuta_imagen(rutaLogo+item.getNombre());
 		int ordenmayor = itemdao.MayorOrden();
 		item.setOrden(ordenmayor+1);
 		item.setActivo(true);
-		item.setTipo_item(new Tipo_Item(1L));
-		return itemdao.save(item);
+
+
+		itemdao.save(item);
+		
+		return 1;
 	}
 
 	@Override
