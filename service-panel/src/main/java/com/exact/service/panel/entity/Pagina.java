@@ -1,4 +1,4 @@
-package com.exact.service.panel.entity;
+	package com.exact.service.panel.entity;
 
 import java.io.Serializable;
 import java.util.List;

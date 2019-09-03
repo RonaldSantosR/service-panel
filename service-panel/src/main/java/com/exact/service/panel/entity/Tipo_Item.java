@@ -38,5 +38,17 @@ public class Tipo_Item implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	
+	
+	public Tipo_Item() {
+		super();
+	}
+
+	public Tipo_Item(Long id) {
+		super();
+		this.id = id;
+	}
+	
 	
 }
