@@ -1,7 +1,7 @@
 package com.exact.service.panel.service.clases;
 
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -120,11 +120,11 @@ public class Itemservice implements IItemservice {
 	
 
 	@Override
-	public Item modificarItem(Item item) {
+	public String modificarItem(Item item) {
 		Optional<Item> itemopt = itemdao.findById(item.getId());
 		
 		if(!itemopt.isPresent()) {
-			return null;
+			return "Item no encontrado";
 		}
 		
 		Item itemActualizado = itemopt.get();
@@ -138,20 +138,24 @@ public class Itemservice implements IItemservice {
 		}
 		
 		if(item.getRuta_imagen()!=null) {
-			itemActualizado.setRuta_imagen(item.getRuta_imagen());
+			itemActualizado.setRuta_imagen(rutaLogo+item.getRuta_imagen());
 		}
 		
 		if(item.getLink_ruta()!=null) {
 			itemActualizado.setLink_ruta(item.getLink_ruta());
 		}
-		
-		cambiarorden(item.getId(),item.getOrden());
-		
-		itemActualizado.setOrden(item.getOrden());
-		
-		itemActualizado.setActivo(item.isActivo());
-		
-		return itemdao.save(itemActualizado);
+		if(item.getTipo_item()!=null) {
+			itemActualizado.setTipo_item(item.getTipo_item());
+		}
+		if(!itemActualizado.isActivo()) {
+			itemActualizado.setActivo(true);
+		}
+		if(item.getOrden()!=0) {
+			cambiarorden(item.getId(),item.getOrden());
+			itemActualizado.setOrden(item.getOrden());
+		}
+		itemdao.save(itemActualizado);
+		return "Se modificó el item";
 	}
 
 }

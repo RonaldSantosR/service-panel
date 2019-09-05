@@ -9,5 +9,5 @@ public interface IItemservice {
 	public int agregarItem(Item item);
 	public Item desactivarItem(Long itemId);
 	public Iterable<Item> cambiarOrdenItem(Long itemId, int orden);
-	public Item modificarItem(Item item);
+	public String modificarItem(Item item);
 }

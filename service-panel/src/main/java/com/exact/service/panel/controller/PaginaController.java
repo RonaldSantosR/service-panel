@@ -1,6 +1,7 @@
 package com.exact.service.panel.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,15 @@ public class PaginaController {
 	
 	
 	@PutMapping("/modificar")
-	public ResponseEntity<Pagina> modificarItem(@RequestBody Pagina pag) throws IOException{
-		return new ResponseEntity<Pagina>(paginaService.modificarPagina(pag) ,HttpStatus.OK);
+	public ResponseEntity<?> modificarPagina(@RequestBody Pagina pag) throws IOException{
+		Pagina paginaModificada = paginaService.modificarPagina(pag);
+		Map<String, Object> respuesta = new HashMap<>();
+		if(paginaModificada==null) {
+			respuesta.put("mensaje", "No se pudo modificar la página");
+			return new ResponseEntity<Map<String, Object>>(respuesta,HttpStatus.BAD_REQUEST);
+		}
+		respuesta.put("mensaje", "Se modificó la página");
+		return new ResponseEntity<Map<String, Object>>(respuesta,HttpStatus.OK);
 	}
 	
 }

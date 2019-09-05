@@ -72,7 +72,6 @@ public class PaginaService implements IPaginaService {
 	public Pagina modificarPagina(Pagina pag) throws IOException {
 		if(pag.getColor()!=null) {
 			return paginaDao.save(pag);
-
 		}
 		
 		return null;
