@@ -43,6 +43,18 @@ public class Item implements Serializable{
 	
 	private boolean activo;
 	
+	private String video;
+	
+	
+	
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
 	public Long getId() {
 		return id;
 	}

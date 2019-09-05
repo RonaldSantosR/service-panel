@@ -25,10 +25,10 @@ public class FooterService implements IFooterService{
 	}
 
 	@Override
-	public Footer modificarFooter(Footer footer) {
+	public String modificarFooter(Footer footer) {
 		Optional<Footer> footerOpt = footerDao.findById(footer.getId());
 		if(!footerOpt.isPresent()) {
-			return null;
+			return "No se encontró el footer";
 		}
 		Footer footerActualizado = footerOpt.get();
 		
@@ -45,7 +45,8 @@ public class FooterService implements IFooterService{
 			footerActualizado.setLogo(rutaLogo+footer.getLogo());
 		}
 		
-		return footerDao.save(footerActualizado);
+		footerDao.save(footerActualizado);
+		return "Se modificó el footer";
 	}
 
 }

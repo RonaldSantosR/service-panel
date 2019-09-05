@@ -1,5 +1,8 @@
 package com.exact.service.panel.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +35,15 @@ public class ItemController {
 	}
 	
 	@PutMapping("/{id}/desactivar")
-	public ResponseEntity<Item> desactivarItem(@PathVariable Long id){
-		return new ResponseEntity<>(itemservice.desactivarItem(id),HttpStatus.OK);
+	public ResponseEntity<?> desactivarItem(@PathVariable Long id){
+		Map<String, Object> respuesta = new HashMap<>();
+		Item itemDesactivado = itemservice.desactivarItem(id);
+		if(itemDesactivado==null) {
+			respuesta.put("mensaje", "No se pudo desactivar el item");	
+			return new ResponseEntity<>(respuesta,HttpStatus.BAD_REQUEST);
+		}
+		respuesta.put("mensaje", "Se desactivó el item");
+		return new ResponseEntity<>(respuesta,HttpStatus.OK);
 	}
 	
 	@PutMapping("/{id}/orden/{orden}")
@@ -42,8 +52,15 @@ public class ItemController {
 	}
 	
 	@PutMapping("/modificar")
-	public ResponseEntity<Item> modificarItem(@RequestBody Item item){
-		return new ResponseEntity<Item>(itemservice.modificarItem(item),HttpStatus.OK);
+	public ResponseEntity<?> modificarItem(@RequestBody Item item){
+		Map<String, Object> respuesta = new HashMap<>();
+		String mensajeItem = itemservice.modificarItem(item);
+		if(mensajeItem==null) {
+			respuesta.put("mensaje", "No se pudo modificar el item");
+			return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.BAD_REQUEST);
+		}
+		respuesta.put("mensaje", mensajeItem);
+		return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.OK);
 	}
 	
 	@PostMapping()
