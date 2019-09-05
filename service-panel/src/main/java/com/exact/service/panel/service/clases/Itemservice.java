@@ -40,7 +40,7 @@ public class Itemservice implements IItemservice {
 	public int  agregarItem(Item item) {
 		
 		try {
-			if(item.getNombre().equals("") || item.getDescripcion().equals("") || item.getLink_ruta().equals("")  || item.getColorTexto().equals("") || item.getTipo_item().equals(null) ) {
+			if(item.getNombre().equals("") || item.getDescripcion().equals("") || item.getLink_ruta().equals("") || item.getTipo_item().equals(null) ) {
 				return 0;
 			}
 		}catch(NullPointerException e) {
@@ -132,15 +132,15 @@ public class Itemservice implements IItemservice {
 		if(item.getDescripcion()!=null) {
 			itemActualizado.setDescripcion(item.getDescripcion());
 		}
-		if(item.getColorTexto()!=null) {
-			itemActualizado.setColorTexto(item.getColorTexto());
-		}
+		
 		if(item.getNombre()!=null) {
 			itemActualizado.setNombre(item.getNombre());
 		}
+		
 		if(item.getRuta_imagen()!=null) {
 			itemActualizado.setRuta_imagen(item.getRuta_imagen());
 		}
+		
 		if(item.getLink_ruta()!=null) {
 			itemActualizado.setLink_ruta(item.getLink_ruta());
 		}

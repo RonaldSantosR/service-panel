@@ -1,7 +1,7 @@
 USE [db_service_panel]
 
 SET IDENTITY_INSERT [dbo].[pagina] ON 
-INSERT [dbo].[pagina] ([pagina_id], [color]) VALUES (1,'#FFFFFF')
+INSERT [dbo].[pagina] ([pagina_id], [color],[descripcioncolor]) VALUES (1,'#FFFFFF','#606362')
 SET IDENTITY_INSERT [dbo].[pagina] OFF
 
 SET IDENTITY_INSERT [dbo].[footer] ON 
@@ -13,11 +13,11 @@ INSERT [dbo].[tipo_item] ([tipo_item_id], [nombre]) VALUES (1, 'ITEM SISTEMA')
 SET IDENTITY_INSERT [dbo].[tipo_item] OFF
 
 SET IDENTITY_INSERT [dbo].[item] ON
-INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [color_texto], [link_ruta],[tipo_item_id],[activo]) VALUES (1, 'SIMIH', 'Sistema de Mensajería In House','C:/Panel/logos/simih.png' ,1,'#269FC0', 'http://www.exact.com.pe/',1,1)
-INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [color_texto], [link_ruta],[tipo_item_id],[activo]) VALUES (2, 'EXTERNUS', 'Sistema de expedición externa','C:/Panel/logos/externus.png' ,2, '#269FC0', 'http://www.exact.com.pe/',1,1)
-INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [color_texto], [link_ruta],[tipo_item_id],[activo]) VALUES (3, 'RVA', 'Sistema de recogo de valijas en agencias','C:/Panel/logos/rva.png',3,'#269FC0', 'http://www.exact.com.pe/',1,1)
-INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [color_texto], [link_ruta],[tipo_item_id],[activo]) VALUES (4, 'ENVI', 'Sistema personalizado de exact','C:/Panel/logos/envi.png' ,4, '#269FC0', 'http://www.exact.com.pe/',1,1)
-INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [color_texto], [link_ruta],[tipo_item_id],[activo]) VALUES (5, 'EWAREHOUSE', 'Sistema personalizado de exact','C:/Panel/logos/ewarehouse.png',5,'#269FC0', 'http://www.exact.com.pe/',1,1)
+INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [link_ruta],[tipo_item_id],[activo]) VALUES (1, 'SIMIH', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.','C:/Panel/logos/simih.png' ,1, 'http://www.exact.com.pe/',1,1)
+INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [link_ruta],[tipo_item_id],[activo]) VALUES (2, 'EXTERNUS', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ','C:/Panel/logos/externus.png' ,2, 'http://www.exact.com.pe/',1,1)
+INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [link_ruta],[tipo_item_id],[activo]) VALUES (3, 'RVA', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ','C:/Panel/logos/rva.png',3, 'http://www.exact.com.pe/',1,1)
+INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [link_ruta],[tipo_item_id],[activo]) VALUES (4, 'ENVI', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ','C:/Panel/logos/envi.png' ,4, 'http://www.exact.com.pe/',1,1)
+INSERT [dbo].[item] ([item_id], [nombre], [descripcion], [ruta_imagen], [orden], [link_ruta],[tipo_item_id],[activo]) VALUES (5, 'EWAREHOUSE', 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.','C:/Panel/logos/ewarehouse.png',5, 'http://www.exact.com.pe/',1,1)
 SET IDENTITY_INSERT [dbo].[item] OFF
 
 SET IDENTITY_INSERT [dbo].[titulo] ON 
