@@ -32,9 +32,6 @@ public class Item implements Serializable{
 	
 	private int orden;
 	
-	@Column(name="color_texto")
-	private String colorTexto;
-	
 	private String link_ruta;
 
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -82,14 +79,6 @@ public class Item implements Serializable{
 
 	public void setOrden(int orden) {
 		this.orden = orden;
-	}
-
-	public String getColorTexto() {
-		return colorTexto;
-	}
-
-	public void setColorTexto(String colorTexto) {
-		this.colorTexto = colorTexto;
 	}
 
 	public String getLink_ruta() {

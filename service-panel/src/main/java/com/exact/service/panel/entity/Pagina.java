@@ -24,7 +24,16 @@ public class Pagina implements Serializable {
 	
 	private String color;
 
+	private String descripcioncolor;	
 	
+	public String getDescripcioncolor() {
+		return descripcioncolor;
+	}
+
+	public void setDescripcioncolor(String descripcioncolor) {
+		this.descripcioncolor = descripcioncolor;
+	}
+
 	public Long getId() {
 		return id;
 	}
