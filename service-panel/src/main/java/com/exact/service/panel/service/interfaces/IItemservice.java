@@ -6,7 +6,7 @@ public interface IItemservice {
 		
 	public Iterable<Item> listarItemsActivos();
 	public Iterable<Item> listarItems();
-	public Item agregarItem(Item item);
+	public int agregarItem(Item item);
 	public Item desactivarItem(Long itemId);
 	public Iterable<Item> cambiarOrdenItem(Long itemId, int orden);
 	public String modificarItem(Item item);

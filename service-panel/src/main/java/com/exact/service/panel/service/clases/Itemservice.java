@@ -37,13 +37,34 @@ public class Itemservice implements IItemservice {
 	}
 
 	@Override
-	public Item agregarItem(Item item) {
-		item.setRuta_imagen(rutaLogo+item.getRuta_imagen());
+	public int  agregarItem(Item item) {
+		
+		try {
+			if(item.getNombre().equals("") || item.getDescripcion().equals("") || item.getLink_ruta().equals("") || item.getTipo_item().equals(null) ) {
+				return 0;
+			}
+		}catch(NullPointerException e) {
+			return 0;
+		}
+		
+		try {
+			if(item.getTipo_item().getId() <=0L) {
+				return 0;
+			}
+
+		}catch(NullPointerException e) {
+			return 0;
+		}
+
+		item.setRuta_imagen(rutaLogo+item.getNombre());
 		int ordenmayor = itemdao.MayorOrden();
 		item.setOrden(ordenmayor+1);
 		item.setActivo(true);
-		item.setTipo_item(new Tipo_Item(1L));
-		return itemdao.save(item);
+
+
+		itemdao.save(item);
+		
+		return 1;
 	}
 
 	@Override
@@ -111,15 +132,15 @@ public class Itemservice implements IItemservice {
 		if(item.getDescripcion()!=null) {
 			itemActualizado.setDescripcion(item.getDescripcion());
 		}
-		if(item.getColorTexto()!=null) {
-			itemActualizado.setColorTexto(item.getColorTexto());
-		}
+		
 		if(item.getNombre()!=null) {
 			itemActualizado.setNombre(item.getNombre());
 		}
+		
 		if(item.getRuta_imagen()!=null) {
 			itemActualizado.setRuta_imagen(rutaLogo+item.getRuta_imagen());
 		}
+		
 		if(item.getLink_ruta()!=null) {
 			itemActualizado.setLink_ruta(item.getLink_ruta());
 		}

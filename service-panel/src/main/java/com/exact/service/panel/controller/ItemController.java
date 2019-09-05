@@ -64,8 +64,25 @@ public class ItemController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Item> guadarItem(@RequestBody Item item) {
-		return  new ResponseEntity<Item>(itemservice.agregarItem(item),HttpStatus.OK);
+	public ResponseEntity<Map<String, Object>> guadarItem(@RequestBody Item item) {
+		
+		String rpta="";
+		HttpStatus status = HttpStatus.OK;
+		Map<String, Object> respuesta = new HashMap<>();
+	
+		switch(itemservice.agregarItem(item)) {
+		case 0 :
+			rpta="No se pudo registrar correctamente";
+			status=HttpStatus.BAD_REQUEST;
+			break;
+		case 1 :
+			rpta="se registró correctamente";
+			status=HttpStatus.OK;
+			break;
+		}
+		
+		respuesta.put("mensaje", rpta);	
+		return new ResponseEntity<>(respuesta,status);
 	}	
 	
 	

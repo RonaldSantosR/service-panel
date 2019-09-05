@@ -60,9 +60,9 @@ public class PaginaService implements IPaginaService {
 		itemlst.removeIf(item->!item.isActivo());
 		
 		vistaPrincipal.put(1, titulos);
-		vistaPrincipal.put(2, itemlst);
-		vistaPrincipal.put(3, footers);
-		vistaPrincipal.put(4, paginas);
+		vistaPrincipal.put(2, paginas);
+		vistaPrincipal.put(3, itemlst);
+		vistaPrincipal.put(4, footers);
 
 		return vistaPrincipal;
 		
