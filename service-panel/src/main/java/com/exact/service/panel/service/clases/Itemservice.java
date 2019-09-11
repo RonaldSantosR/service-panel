@@ -4,6 +4,7 @@ package com.exact.service.panel.service.clases;
 
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,8 +40,16 @@ public class Itemservice implements IItemservice {
 	IHandleFileEdao handleFileEdao;
 		
 	@Override
-	public Iterable<Item> listarItemsActivos() {
+	public Iterable<Item> listarItemsActivos() throws IOException {
 		Iterable<Item> items = itemdao.findAll();
+		
+		
+		for(Item item : items) {
+			String imagenB64=ConvertImageToBase64.encodeToString(item.getRuta_imagen());
+			item.setRuta_imagen(imagenB64);
+		}
+		
+		
 		List<Item> itemlst = StreamSupport.stream(items.spliterator(), false).collect(Collectors.toList());
 		itemlst.removeIf(item->!item.isActivo());
 		return itemlst;
