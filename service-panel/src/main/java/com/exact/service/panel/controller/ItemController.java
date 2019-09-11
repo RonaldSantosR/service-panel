@@ -2,6 +2,7 @@ package com.exact.service.panel.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.exact.service.panel.entity.Item;
 import com.exact.service.panel.service.interfaces.IItemservice;
@@ -26,7 +29,7 @@ public class ItemController {
 	IItemservice itemservice;
 	
 	@GetMapping()
-	public ResponseEntity<Iterable<Item>> listarItem() {
+	public ResponseEntity<Iterable<Item>> listarItem() throws IOException {
 		return  new ResponseEntity<>(itemservice.listarItems(),HttpStatus.OK);
 	}
 	
@@ -53,9 +56,9 @@ public class ItemController {
 	}
 	
 	@PutMapping("/modificar")
-	public ResponseEntity<?> modificarItem(@RequestBody Item item){
+	public ResponseEntity<?> modificarItem(@RequestBody Item item, @RequestParam(required=false) MultipartFile file) throws IOException{
 		Map<String, Object> respuesta = new HashMap<>();
-		String mensajeItem = itemservice.modificarItem(item);
+		String mensajeItem = itemservice.modificarItem(item, file);
 		if(mensajeItem==null) {
 			respuesta.put("mensaje", "No se pudo modificar el item");
 			return new ResponseEntity<Map<String, Object>>(respuesta, HttpStatus.BAD_REQUEST);
@@ -65,13 +68,13 @@ public class ItemController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Map<String, Object>> guadarItem(@RequestBody Item item) {
+	public ResponseEntity<Map<String, Object>> guadarItem(@RequestBody Item item, @RequestParam MultipartFile file) throws IOException {
 		
 		String rpta="";
 		HttpStatus status = HttpStatus.OK;
 		Map<String, Object> respuesta = new HashMap<>();
 	
-		switch(itemservice.agregarItem(item)) {
+		switch(itemservice.agregarItem(item, file)) {
 		case 0 :
 			rpta="No se pudo registrar correctamente";
 			status=HttpStatus.BAD_REQUEST;
@@ -84,7 +87,12 @@ public class ItemController {
 		
 		respuesta.put("mensaje", rpta);	
 		return new ResponseEntity<>(respuesta,status);
-	}	
+	}
+	
+	@GetMapping("/ordenitems")
+	public ResponseEntity<List<Integer>> listarOrdenItems(){
+		return new ResponseEntity<List<Integer>>(itemservice.listarOrdenItems(), HttpStatus.OK);
+	}
 	
 	
 }

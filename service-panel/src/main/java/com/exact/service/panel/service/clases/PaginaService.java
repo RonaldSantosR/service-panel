@@ -25,6 +25,8 @@ import com.exact.service.panel.utils.ConvertImageToBase64;
 @Service
 public class PaginaService implements IPaginaService {
 
+	private static final String USUARIO_MANT = "USER_MANTENIMIENTO";
+	
 	@Autowired
 	IPaginaDao paginaDao;
 	
@@ -38,7 +40,7 @@ public class PaginaService implements IPaginaService {
 	IFooterDao footerDao;
 	
 	@Override
-	public Map<Integer,Object> listarPaginaPrincipal() throws IOException {
+	public Map<Integer,Object> listarPaginaPrincipal(String perfil) throws IOException {
 
 		Iterable<Titulo> titulos = tituloDao.findAll();
 		Iterable<Item> items = itemDao.findAll();
@@ -58,11 +60,17 @@ public class PaginaService implements IPaginaService {
 		
 		List<Item> itemlst = StreamSupport.stream(items.spliterator(), false).collect(Collectors.toList());
 		itemlst.removeIf(item->!item.isActivo());
-		
+				
 		vistaPrincipal.put(1, titulos);
 		vistaPrincipal.put(2, paginas);
 		vistaPrincipal.put(3, itemlst);
 		vistaPrincipal.put(4, footers);
+		
+		if(perfil.equals(USUARIO_MANT)) {
+			vistaPrincipal.put(5, "MANTENIMIENTO");
+		}else {
+			vistaPrincipal.put(5, "DEMO");
+		}
 
 		return vistaPrincipal;
 		
