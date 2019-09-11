@@ -7,7 +7,7 @@ import com.exact.service.panel.entity.Pagina;
 
 public interface IPaginaService {
 
-	public Map<Integer,Object> listarPaginaPrincipal() throws IOException;
+	public Map<Integer,Object> listarPaginaPrincipal(String perfil) throws IOException;
 	
 	public Pagina modificarPagina(Pagina pag) throws IOException;
 	

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,9 +26,11 @@ public class PaginaController {
 	@Autowired
 	IPaginaService paginaService;
 	
+	@SuppressWarnings("unchecked")
 	@GetMapping
-	public ResponseEntity<Map<Integer,Object>> listarPaginaPrincipal() throws IOException{
-		return  new ResponseEntity<>(paginaService.listarPaginaPrincipal(),HttpStatus.OK);
+	public ResponseEntity<Map<Integer,Object>> listarPaginaPrincipal(Authentication authentication) throws IOException{
+		Map<String, Object> datosUsuario = (Map<String, Object>) authentication.getPrincipal();
+		return  new ResponseEntity<>(paginaService.listarPaginaPrincipal(datosUsuario.get("perfil").toString()),HttpStatus.OK);
 	}
 	
 	

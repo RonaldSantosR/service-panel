@@ -1,3 +1,4 @@
+
 USE [db_service_panel]
 
 SET IDENTITY_INSERT [dbo].[pagina] ON 
@@ -22,5 +23,5 @@ SET IDENTITY_INSERT [dbo].[item] OFF
 
 SET IDENTITY_INSERT [dbo].[titulo] ON 
 INSERT [dbo].[titulo] ([titulo_id], [texto],[color_alto],[color_medio],[color_bajo],[opacidad]) VALUES (1, 'NUESTRO PORTAFOLIO', '#004885', '#004885', '#269FC0', '#B4D7EB')
-INSERT [dbo].[titulo] ([titulo_id], [texto],[color_alto],[color_medio],[color_bajo],[opacidad]) VALUES (2, 'DE SERVICIOS', '#004885', '#004885', '#269FC0', '#B4D7EB')
+INSERT [dbo].[titulo] ([titulo_id], [texto],[color_alto],[color_medio],[color_bajo],[opacidad]) VALUES (2, 'DE SOLUCIONES', '#004885', '#004885', '#269FC0', '#B4D7EB')
 SET IDENTITY_INSERT [dbo].[titulo] OFF
