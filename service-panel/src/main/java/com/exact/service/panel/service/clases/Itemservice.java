@@ -3,6 +3,7 @@ package com.exact.service.panel.service.clases;
 
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import com.exact.service.panel.dao.IItemDao;
 import com.exact.service.panel.entity.Item;
 import com.exact.service.panel.entity.Tipo_Item;
 import com.exact.service.panel.service.interfaces.IItemservice;
+import com.exact.service.panel.utils.ConvertImageToBase64;
 
 
 @Service
@@ -29,8 +31,16 @@ public class Itemservice implements IItemservice {
 	String rutaLogo;
 		
 	@Override
-	public Iterable<Item> listarItemsActivos() {
+	public Iterable<Item> listarItemsActivos() throws IOException {
 		Iterable<Item> items = itemdao.findAll();
+		
+		
+		for(Item item : items) {
+			String imagenB64=ConvertImageToBase64.encodeToString(item.getRuta_imagen());
+			item.setRuta_imagen(imagenB64);
+		}
+		
+		
 		List<Item> itemlst = StreamSupport.stream(items.spliterator(), false).collect(Collectors.toList());
 		itemlst.removeIf(item->!item.isActivo());
 		return itemlst;

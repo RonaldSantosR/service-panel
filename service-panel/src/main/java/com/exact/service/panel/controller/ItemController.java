@@ -1,5 +1,6 @@
 package com.exact.service.panel.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/activos")
-	public ResponseEntity<Iterable<Item>> listarItemsActivos() {
+	public ResponseEntity<Iterable<Item>> listarItemsActivos() throws IOException {
 		return  new ResponseEntity<>(itemservice.listarItemsActivos(),HttpStatus.OK);
 	}
 	
