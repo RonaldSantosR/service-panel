@@ -168,13 +168,16 @@ public class Itemservice implements IItemservice {
 		}
 		
 		if(file!=null) {
-			String rutaImagen = item.getNombre()+"."+FilenameUtils.getExtension(file.getOriginalFilename());
-			itemActualizado.setRuta_imagen(rutaLogo+rutaImagen);
-			MockMultipartFile multipartFile = new MockMultipartFile(rutaImagen, rutaImagen,
-					file.getContentType(), file.getInputStream());
-			if (handleFileEdao.upload(multipartFile,ruta) != 1) {
-				return "No se actualizó la imagen";
-			}
+			//String nombrearchivo = FilenameUtils.removeExtension(file.getOriginalFilename());
+			String rutaImagen ="";
+			/*if(nombrearchivo.equals(item.getNombre())) {
+				rutaImagen = item.getNombre()+"."+FilenameUtils.getExtension(file.getOriginalFilename());
+			}else {
+				rutaImagen = file.getOriginalFilename();
+			}*/
+			
+			rutaImagen = file.getOriginalFilename();
+			itemActualizado.setRuta_imagen(rutaLogo+rutaImagen);						
 		}
 		
 		itemdao.save(itemActualizado);

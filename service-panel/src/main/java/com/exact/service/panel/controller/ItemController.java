@@ -57,8 +57,13 @@ public class ItemController {
 	}
 	
 	@PutMapping("/modificar")
-	public ResponseEntity<?> modificarItem(@RequestBody Item item, @RequestParam(required=false) MultipartFile file) throws IOException{
+	public ResponseEntity<?> modificarItem(@RequestParam ("item") String itemString, @RequestParam(required = false) MultipartFile file) throws IOException{
+		String rpta="";
+		HttpStatus status = HttpStatus.OK;
 		Map<String, Object> respuesta = new HashMap<>();
+		ObjectMapper mapper = new ObjectMapper();
+		Item item = mapper.readValue(itemString, Item.class);
+		
 		String mensajeItem = itemservice.modificarItem(item, file);
 		if(mensajeItem==null) {
 			respuesta.put("mensaje", "No se pudo modificar el item");
