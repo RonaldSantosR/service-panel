@@ -1,8 +1,6 @@
 package com.exact.service.panel.service.clases;
 
-
-
-
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.exact.service.panel.dao.IHandleFileEdao;
 import com.exact.service.panel.dao.IItemDao;
 import com.exact.service.panel.entity.Item;
-import com.exact.service.panel.entity.Tipo_Item;
 import com.exact.service.panel.service.interfaces.IItemservice;
 import com.exact.service.panel.utils.ConvertImageToBase64;
 
@@ -59,21 +56,13 @@ public class Itemservice implements IItemservice {
 	public int  agregarItem(Item item, MultipartFile file) throws IOException {
 		String ruta = "logos";
 		try {
-			if(item.getNombre().equals("") || item.getDescripcion().equals("") || item.getLink_ruta().equals("") || item.getTipo_item().equals(null) || file==null ) {
+			if(item.getNombre()==null || item.getDescripcion()==null || item.getLink_ruta()==null || file==null ) {
 				return 0;
 			}
 		}catch(NullPointerException e) {
 			return 0;
 		}
-		
-		try {
-			if(item.getTipo_item().getId() <=0L) {
-				return 0;
-			}
 
-		}catch(NullPointerException e) {
-			return 0;
-		}
 		String rutaImagen = item.getNombre()+"."+FilenameUtils.getExtension(file.getOriginalFilename());
 		item.setRuta_imagen(rutaLogo+rutaImagen);
 		MockMultipartFile multipartFile = new MockMultipartFile(rutaImagen, rutaImagen,
