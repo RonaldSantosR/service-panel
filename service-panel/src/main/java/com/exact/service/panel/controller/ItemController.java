@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.exact.service.panel.entity.Item;
 import com.exact.service.panel.service.interfaces.IItemservice;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/items")
@@ -68,12 +69,14 @@ public class ItemController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Map<String, Object>> guadarItem(@RequestBody Item item, @RequestParam MultipartFile file) throws IOException {
+	public ResponseEntity<Map<String, Object>> guadarItem(@RequestParam ("item") String itemString, @RequestParam MultipartFile file) throws IOException {
 		
 		String rpta="";
 		HttpStatus status = HttpStatus.OK;
 		Map<String, Object> respuesta = new HashMap<>();
-	
+		ObjectMapper mapper = new ObjectMapper();
+		Item item = mapper.readValue(itemString, Item.class);
+		
 		switch(itemservice.agregarItem(item, file)) {
 		case 0 :
 			rpta="No se pudo registrar correctamente";
