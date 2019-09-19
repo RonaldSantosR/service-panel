@@ -14,9 +14,10 @@ public interface IItemservice {
 
 	public Iterable<Item> listarItemsActivos() throws IOException;
 	public Iterable<Item> listarItems() throws IOException;
-	public int agregarItem(Item item, MultipartFile file) throws IOException;
+	public Item agregarItem(Item item, MultipartFile file) throws IOException;
 	public Item desactivarItem(Long itemId);
 	public Iterable<Item> cambiarOrdenItem(Long itemId, int orden);
 	public String modificarItem(Item item,  MultipartFile file) throws IOException;
 	public List<Integer> listarOrdenItems();
+	public Item activarItem(Long itemId);
 }

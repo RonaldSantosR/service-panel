@@ -53,14 +53,14 @@ public class Itemservice implements IItemservice {
 	}
 
 	@Override
-	public int  agregarItem(Item item, MultipartFile file) throws IOException {
+	public Item  agregarItem(Item item, MultipartFile file) throws IOException {
 		String ruta = "logos";
 		try {
 			if(item.getNombre()==null || item.getDescripcion()==null || item.getLink_ruta()==null || file==null ) {
-				return 0;
+				return null;
 			}
 		}catch(NullPointerException e) {
-			return 0;
+			return null;
 		}
 
 		String rutaImagen = item.getNombre()+"."+FilenameUtils.getExtension(file.getOriginalFilename());
@@ -68,14 +68,12 @@ public class Itemservice implements IItemservice {
 		MockMultipartFile multipartFile = new MockMultipartFile(rutaImagen, rutaImagen,
 				file.getContentType(), file.getInputStream());
 		if (handleFileEdao.upload(multipartFile,ruta) != 1) {
-			return 0;
+			return null;
 		}
 		int ordenmayor = itemdao.MayorOrden();
 		item.setOrden(ordenmayor+1);
 		item.setActivo(true);
-		itemdao.save(item);
-		
-		return 1;
+		return itemdao.save(item);
 	}
 
 	@Override
@@ -194,6 +192,31 @@ public class Itemservice implements IItemservice {
 		}
 		
 		return ordenItems;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public Item activarItem(Long itemId) {
+		Optional<Item> itemopt = itemdao.findById(itemId);
+		if(!itemopt.isPresent()) {
+			return null;
+		}
+		Item item = itemopt.get();
+		item.setActivo(true);
+		
+		return itemdao.save(item);
 	}
 
 }
