@@ -30,7 +30,7 @@ public class ItemController {
 	IItemservice itemservice;
 	
 	@GetMapping()
-	public ResponseEntity<Iterable<Item>> listarItem() throws IOException {
+	public ResponseEntity<Iterable<Item>> listarItems() throws IOException {
 		return  new ResponseEntity<>(itemservice.listarItems(),HttpStatus.OK);
 	}
 	
@@ -69,32 +69,32 @@ public class ItemController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Map<String, Object>> guadarItem(@RequestParam ("item") String itemString, @RequestParam MultipartFile file) throws IOException {
+	public ResponseEntity<Item> guadarItem(@RequestParam ("item") String itemString, @RequestParam MultipartFile file) throws IOException {
 		
-		String rpta="";
-		HttpStatus status = HttpStatus.OK;
-		Map<String, Object> respuesta = new HashMap<>();
 		ObjectMapper mapper = new ObjectMapper();
 		Item item = mapper.readValue(itemString, Item.class);
-		
-		switch(itemservice.agregarItem(item, file)) {
-		case 0 :
-			rpta="No se pudo registrar correctamente";
-			status=HttpStatus.BAD_REQUEST;
-			break;
-		case 1 :
-			rpta="se registró correctamente";
-			status=HttpStatus.OK;
-			break;
+		Item itemcreado = itemservice.agregarItem(item, file);
+		if(itemcreado==null) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
-		
-		respuesta.put("mensaje", rpta);	
-		return new ResponseEntity<>(respuesta,status);
+		return new ResponseEntity<>(itemcreado, HttpStatus.OK);
 	}
 	
 	@GetMapping("/ordenitems")
 	public ResponseEntity<List<Integer>> listarOrdenItems(){
 		return new ResponseEntity<List<Integer>>(itemservice.listarOrdenItems(), HttpStatus.OK);
+	}
+	
+	@PutMapping("/{id}/activar")
+	public ResponseEntity<?> activarItem(@PathVariable Long id){
+		Map<String, Object> respuesta = new HashMap<>();
+		Item itemActivado = itemservice.activarItem(id);
+		if(itemActivado==null) {
+			respuesta.put("mensaje", "No se pudo desactivar el item");	
+			return new ResponseEntity<>(respuesta,HttpStatus.BAD_REQUEST);
+		}
+		respuesta.put("mensaje", "Se desactivó el item");
+		return new ResponseEntity<>(respuesta,HttpStatus.OK);
 	}
 	
 	
