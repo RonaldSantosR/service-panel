@@ -18,7 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.exact.service.panel.dao.IHandleFileEdao;
 import com.exact.service.panel.dao.IItemDao;
+import com.exact.service.panel.dao.ITipoItemDao;
 import com.exact.service.panel.entity.Item;
+import com.exact.service.panel.entity.Tipo_Item;
 import com.exact.service.panel.service.interfaces.IItemservice;
 import com.exact.service.panel.utils.ConvertImageToBase64;
 
@@ -32,6 +34,10 @@ public class Itemservice implements IItemservice {
 	
 	@Value("${ruta.logos}")
 	String rutaLogo;
+	
+	@Autowired
+	ITipoItemDao  tipoitemdao;	
+	
 	
 	@Autowired
 	IHandleFileEdao handleFileEdao;
@@ -54,6 +60,9 @@ public class Itemservice implements IItemservice {
 
 	@Override
 	public Item  agregarItem(Item item, MultipartFile file) throws IOException {
+		
+		 Tipo_Item tipoitem =  tipoitemdao.BuscarItembyID(1L);
+		
 		String ruta = "logos";
 		try {
 			if(item.getNombre()==null || item.getDescripcion()==null || item.getLink_ruta()==null || file==null ) {
@@ -62,7 +71,7 @@ public class Itemservice implements IItemservice {
 		}catch(NullPointerException e) {
 			return null;
 		}
-
+		
 		String rutaImagen = item.getNombre()+"."+FilenameUtils.getExtension(file.getOriginalFilename());
 		item.setRuta_imagen(rutaLogo+rutaImagen);
 		MockMultipartFile multipartFile = new MockMultipartFile(rutaImagen, rutaImagen,
@@ -71,6 +80,7 @@ public class Itemservice implements IItemservice {
 			return null;
 		}
 		int ordenmayor = itemdao.MayorOrden();
+		item.setTipo_item(tipoitem);
 		item.setOrden(ordenmayor+1);
 		item.setActivo(true);
 		return itemdao.save(item);
